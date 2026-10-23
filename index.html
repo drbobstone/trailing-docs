@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trailing Docs Portal</title>
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #fff; --ink: #1c2430; --muted: #5d6b7e;
+    --line: #dde3ea; --brand: #1f5fbf; --brand-ink: #fff; --ok: #1d8a4e; --warn: #b26a00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #11161d; --card: #1a212b; --ink: #e6ebf2; --muted: #9aa7b8;
+      --line: #2b3542; --brand: #5b95ef; --brand-ink: #0b1220; --ok: #4fc283; --warn: #f0a940; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: var(--brand); color: var(--brand-ink); padding: 14px 16px; }
+  header .wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  header small { font-weight: 400; opacity: .8; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  main { padding: 24px 16px 48px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 24px 0 8px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; }
+  .steps { display: flex; gap: 8px; margin-bottom: 20px; font-size: .85rem; color: var(--muted); flex-wrap: wrap; }
+  .steps span { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); }
+  .steps span.on { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+  label { display: block; font-weight: 600; font-size: .9rem; margin: 14px 0 4px; }
+  input, select { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font: inherit; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+  .drop { margin-top: 14px; border: 2px dashed var(--line); border-radius: 12px; padding: 28px; text-align: center; color: var(--muted); cursor: pointer; }
+  .drop.hover { border-color: var(--brand); color: var(--ink); }
+  .files { list-style: none; padding: 0; margin: 12px 0 0; }
+  .files li { padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; margin-top: 6px; display: flex; justify-content: space-between; gap: 8px; font-size: .9rem; overflow-wrap: anywhere; }
+  button { margin-top: 20px; width: 100%; padding: 12px; border: 0; border-radius: 8px; background: var(--brand); color: var(--brand-ink); font: inherit; font-weight: 700; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .bar { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 16px 0 8px; }
+  .bar div { height: 100%; width: 0; background: var(--brand); transition: width .3s; }
+  .status { color: var(--muted); font-size: .9rem; min-height: 1.5em; }
+  .big { font-size: 3rem; text-align: center; margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .9rem; }
+  th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .78rem; font-weight: 700; color: var(--warn); border: 1px solid var(--warn); white-space: nowrap; }
+  .faq dt { font-weight: 700; margin-top: 12px; }
+  .faq dd { margin: 2px 0 0; color: var(--muted); }
+  .fine { font-size: .78rem; color: var(--muted); margin-top: 20px; text-align: center; }
+  .hidden { display: none; }
+  a.again { display: block; text-align: center; margin-top: 20px; color: var(--brand); }
+</style>
+</head>
+<body>
+<header><div class="wrap">📄 Trailing Docs Portal <small>v0.0.1-requirements-pending</small></div></header>
+
+<main class="wrap">
+
+  <!-- Step 1: info -->
+  <section id="s1" class="card">
+    <div class="steps"><span class="on">1. Loan info</span><span>2. Upload</span><span>3. Done (allegedly)</span></div>
+    <h1>Submit trailing documents</h1>
+    <p class="sub">Tell us about the loan. We'll take it from here. Eventually.</p>
+    <form id="f1">
+      <div class="row">
+        <div><label for="loan">Loan number</label><input id="loan" required placeholder="e.g. 0042-TBD"></div>
+        <div><label for="closed">Closing date</label><input id="closed" type="date" required></div>
+      </div>
+      <label for="borrower">Borrower name</label>
+      <input id="borrower" required placeholder="Pat Q. Borrower">
+      <div class="row">
+        <div><label for="state">Property state</label>
+          <select id="state" required>
+            <option value="">Choose…</option>
+            <option>CA</option><option>TX</option><option>FL</option><option>NY</option><option>OH</option><option>Some other state</option>
+          </select></div>
+        <div><label for="role">You are a…</label>
+          <select id="role" required>
+            <option value="">Choose…</option>
+            <option>Settlement agent</option><option>Title company</option><option>Lender post-closing</option>
+            <option>County recorder</option><option>Product manager awaiting requirements</option>
+          </select></div>
+      </div>
+      <button type="submit">Continue</button>
+    </form>
+  </section>
+
+  <!-- Step 2: upload -->
+  <section id="s2" class="card hidden">
+    <div class="steps"><span>1. Loan info</span><span class="on">2. Upload</span><span>3. Done (allegedly)</span></div>
+    <h1>Upload documents</h1>
+    <p class="sub">Recorded mortgage, final title policy, that one form nobody can find — toss 'em in.</p>
+    <label for="dtype">Document type</label>
+    <select id="dtype">
+      <option>Recorded Mortgage / Deed of Trust</option>
+      <option>Final Title Policy</option>
+      <option>Recorded Assignment</option>
+      <option>Lien Release</option>
+      <option>Other (we'll figure it out)</option>
+    </select>
+    <div id="drop" class="drop">Drag files here or <u>click to browse</u><br><small>Any size. Any format. We genuinely do not care.</small></div>
+    <input id="file" type="file" multiple class="hidden">
+    <ul id="list" class="files"></ul>
+    <div id="prog" class="hidden">
+      <div class="bar"><div id="barfill"></div></div>
+      <div id="status" class="status"></div>
+    </div>
+    <button id="go" disabled>Submit documents</button>
+    <p class="fine">Nothing actually leaves your browser. Seriously. There is no server. There is barely a website.</p>
+  </section>
+
+  <!-- Step 3: punchline -->
+  <section id="s3" class="card hidden">
+    <div class="steps"><span>1. Loan info</span><span>2. Upload</span><span class="on">3. Done (allegedly)</span></div>
+    <div class="big">🐢</div>
+    <h1 style="text-align:center">Your documents are trailing.</h1>
+    <p class="sub" style="text-align:center" id="lede"></p>
+
+    <h2>Document status</h2>
+    <table>
+      <thead><tr><th>Document</th><th>Status</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <h2>FAQ</h2>
+    <dl class="faq">
+      <dt>Where is my document?</dt>
+      <dd>Trailing. It's in the name. You can't spell "trailing documents" without "documents that are somewhere behind you."</dd>
+      <dt>When will it show up?</dt>
+      <dd>Estimated arrival: shortly after the requirements do.</dd>
+      <dt>Can I see the requirements?</dt>
+      <dd>They're also trailing.</dd>
+      <dt>Is this production-ready?</dt>
+      <dd>It ships in February. Whether it's ready is a separate, trailing question.</dd>
+      <dt>Who do I contact?</dt>
+      <dd>Please submit a trailing inquiry. A response will follow at a respectful distance.</dd>
+    </dl>
+
+    <a class="again" href="#" id="again">Submit more documents into the void →</a>
+  </section>
+
+  <p class="fine">Trailing Docs Portal · Built in an afternoon · Requirements: <span class="pill">TRAILING</span></p>
+</main>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const show = id => ["s1","s2","s3"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+  let files = [], info = {};
+
+  $("f1").addEventListener("submit", e => {
+    e.preventDefault();
+    info = { loan: $("loan").value, borrower: $("borrower").value, role: $("role").value };
+    show("s2");
+  });
+
+  const drop = $("drop"), input = $("file");
+  drop.onclick = () => input.click();
+  ["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("hover"); }));
+  ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("hover"); }));
+  drop.addEventListener("drop", e => addFiles(e.dataTransfer.files));
+  input.onchange = () => addFiles(input.files);
+
+  function addFiles(fl) {
+    const type = $("dtype").value;
+    for (const f of fl) files.push({ name: f.name, size: f.size, type });
+    $("list").innerHTML = "";
+    files.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = f.name;
+      const s = document.createElement("small");
+      s.textContent = f.type + " · " + (f.size / 1024).toFixed(0) + " KB";
+      li.appendChild(s);
+      $("list").appendChild(li);
+    });
+    $("go").disabled = files.length === 0;
+  }
+
+  const msgs = [
+    "Uploading…", "Encrypting with industry-standard vibes…", "Notifying the county recorder (by carrier pigeon)…",
+    "Waiting for requirements…", "Still waiting for requirements…", "Reconciling with the final title policy that hasn't been issued…",
+    "Placing documents a respectful distance behind schedule…", "Done-ish."
+  ];
+  const statuses = [
+    "Trailing (~6–8 weeks)", "Trailing — spotted near the county recorder", "Trailing, but with momentum",
+    "Trailing behind the other trailing docs", "In transit to February", "Pending requirements", "Received in spirit"
+  ];
+
+  $("go").onclick = () => {
+    $("go").disabled = true;
+    $("prog").classList.remove("hidden");
+    let i = 0;
+    const tick = setInterval(() => {
+      $("status").textContent = msgs[i];
+      $("barfill").style.width = Math.min(100, Math.round((i + 1) / msgs.length * 100)) + "%";
+      if (++i === msgs.length) { clearInterval(tick); setTimeout(finish, 600); }
+    }, 650);
+  };
+
+  function finish() {
+    const n = files.length;
+    $("lede").textContent =
+      `Thanks! We received ${n} document${n === 1 ? "" : "s"} for ${info.borrower}'s loan ${info.loan}. Well — "received." ` +
+      `${n === 1 ? "It's" : "They're"} not here yet. ${n === 1 ? "Its" : "Their"} visibility on this site is… trailing.`;
+    $("rows").innerHTML = "";
+    files.forEach(f => {
+      const tr = document.createElement("tr");
+      const a = document.createElement("td"); a.textContent = f.name;
+      const b = document.createElement("td");
+      const p = document.createElement("span"); p.className = "pill";
+      p.textContent = statuses[Math.floor(Math.random() * statuses.length)];
+      b.appendChild(p); tr.append(a, b); $("rows").appendChild(tr);
+    });
+    show("s3");
+  }
+
+  $("again").onclick = e => {
+    e.preventDefault();
+    files = []; $("list").innerHTML = ""; input.value = "";
+    $("prog").classList.add("hidden"); $("barfill").style.width = "0"; $("status").textContent = "";
+    $("go").disabled = true;
+    show("s2");
+  };
+</script>
+</body>
+</html>
